@@ -1,0 +1,23 @@
+{
+  "name": "AllmightyBot-ATLauncher",
+  "version": "1.0.0",
+  "description": "Small bot written for the ATLauncher IRC channels on Espernet",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ATLauncher/AllmightyBot.git"
+  },
+  "author": "RyanTheAllmighty",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/ATLauncher/AllmightyBot/issues"
+  },
+  "homepage": "https://github.com/ATLauncher/AllmightyBot",
+  "dependencies": {
+    "irc": "^0.3.12",
+    "request": "^2.60.0"
+  }
+}

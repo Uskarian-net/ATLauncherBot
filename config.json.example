@@ -1,0 +1,8 @@
+{
+    "server": "some.irc.com",
+    "username": "Username",
+    "nickserv_password": "password",
+    "channels_to_join": [
+        "#Some-Channel"
+    ]
+}
