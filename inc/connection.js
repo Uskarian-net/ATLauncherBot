@@ -43,6 +43,10 @@ var client = new irc.Client(config.server, config.username, {
 
 module.exports.client = client;
 
+module.exports.client.replyToMessage = function (user, channel, message) {
+    client.say(channel, user + ": " + message);
+};
+
 module.exports.client.sendMessage = function (channel, message) {
     client.say(channel, message);
 };

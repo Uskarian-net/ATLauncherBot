@@ -82,13 +82,22 @@ module.exports.secondsToString = function (totalSeconds) {
     }
 };
 
-module.exports.getMessageParts = function (message) {
+module.exports.getMessageParts = function (message, limit) {
+    if (typeof limit == 'undefined') {
+        limit = 0;
+    }
+
     var re = /([^"]\S*|\".+?\")\s*/g;
     var m;
+    var lastIndex = 0;
 
     var matches = [];
 
     do {
+        if (limit != 0 && matches.length == (limit - 1)) {
+            break;
+        }
+
         m = re.exec(message);
         if (m) {
             if (m[1][0] == '"') {
@@ -99,9 +108,15 @@ module.exports.getMessageParts = function (message) {
                 m[1] = m[1].slice(0, m[1].length - 1);
             }
 
+            lastIndex = m.index + m[1].length + 1;
+
             matches.push(m[1]);
         }
     } while (m);
+
+    if (limit != 0 && message.length > lastIndex) {
+        matches.push(message.substr(lastIndex));
+    }
 
     return matches;
 };
