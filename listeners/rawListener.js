@@ -18,28 +18,10 @@
 
 'use strict';
 
-var commands = require('../inc/commands');
-
 module.exports.enabled = true;
 
-module.exports.listening_for = 'message#';
+module.exports.listening_for = 'raw';
 
-module.exports.callback = function (user, channel, message, object) {
-    if (message[0] == '!') {
-        var name = message;
-
-        if (name.indexOf(" ") != 0) {
-            name = message.split(" ")[0];
-        }
-
-        name = name.substr(1);
-
-        commands.findCommand(name, function (err, res) {
-            if (err) {
-                return console.error(err);
-            }
-
-            res.callback(name, channel, user, message, object);
-        });
-    }
+module.exports.callback = function (object) {
+    console.log(object);
 };
