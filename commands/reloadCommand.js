@@ -18,14 +18,18 @@
 
 'use strict';
 
-var connection = require('./inc/connection');
-var exitHandler = require('./inc/exitHandler');
+var connection = require('../inc/connection');
 
-process.on('exit', exitHandler);
-process.on('SIGINT', exitHandler);
-process.on('uncaughtException', function (err) {
-    console.error(err);
-    exitHandler();
-});
+module.exports.enabled = true;
 
-connection.connect();
+module.exports.name = ['reload', 'refresh'];
+
+module.exports.callback = function (command_name, channel, user, message, object) {
+    connection.reloadListeners(function () {
+        connection.client.sendMessageToAll('Listeners reloaded!');
+    });
+
+    connection.reloadCommands(function () {
+        connection.client.sendMessageToAll('Commands reloaded!');
+    });
+};

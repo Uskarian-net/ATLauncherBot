@@ -11,13 +11,16 @@
     "url": "https://github.com/ATLauncher/AllmightyBot.git"
   },
   "author": "RyanTheAllmighty",
-  "license": "GNU GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ATLauncher/AllmightyBot/issues"
   },
   "homepage": "https://github.com/ATLauncher/AllmightyBot",
   "dependencies": {
+    "async": "^1.4.0",
     "irc": "^0.3.12",
-    "request": "^2.60.0"
+    "lodash": "^3.10.0",
+    "request": "^2.60.0",
+    "string-format": "^0.5.0"
   }
 }

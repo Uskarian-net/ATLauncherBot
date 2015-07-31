@@ -18,14 +18,33 @@
 
 'use strict';
 
-var connection = require('./inc/connection');
-var exitHandler = require('./inc/exitHandler');
+var connection = require('../inc/connection');
+var commands = require('../inc/commands');
 
-process.on('exit', exitHandler);
-process.on('SIGINT', exitHandler);
-process.on('uncaughtException', function (err) {
-    console.error(err);
-    exitHandler();
-});
+module.exports.enabled = true;
 
-connection.connect();
+module.exports.listening_for = 'message#';
+
+module.exports.callback = function (user, channel, message, object) {
+    if (message[0] == '!') {
+        var name = message;
+
+        if (name.indexOf(" ") != 0) {
+            name = message.split(" ")[0];
+        }
+
+        name = name.substr(1);
+
+        console.log(name);
+
+        commands.findCommand(name, function (err, res) {
+            if (err) {
+                return console.error(err);
+            }
+
+            console.log(res.name);
+
+            res.callback(name, channel, user, message, object);
+        });
+    }
+};

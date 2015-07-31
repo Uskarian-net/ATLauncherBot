@@ -18,14 +18,19 @@
 
 'use strict';
 
-var connection = require('./inc/connection');
-var exitHandler = require('./inc/exitHandler');
+var fs = require('fs');
+var requireHacks = require('./requireHacks');
+var connection = require('./connection');
 
-process.on('exit', exitHandler);
-process.on('SIGINT', exitHandler);
-process.on('uncaughtException', function (err) {
-    console.error(err);
-    exitHandler();
-});
+module.exports.loadListeners = function () {
+    fs.readdirSync('listeners/').forEach(function (file) {
+        // Remove from the require cache so we can reload it's information
+        requireHacks.uncache('../listeners/' + file);
 
-connection.connect();
+        var listener = require('../listeners/' + file);
+
+        if (listener.enabled) {
+            connection.client.addListener(listener.listening_for, listener.callback);
+        }
+    });
+};

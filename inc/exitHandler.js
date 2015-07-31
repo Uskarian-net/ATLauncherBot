@@ -18,14 +18,17 @@
 
 'use strict';
 
-var connection = require('./inc/connection');
-var exitHandler = require('./inc/exitHandler');
+var connection = require('./connection');
+var commands = require('./commands');
+var alreadyExiting = false;
 
-process.on('exit', exitHandler);
-process.on('SIGINT', exitHandler);
-process.on('uncaughtException', function (err) {
-    console.error(err);
-    exitHandler();
-});
+module.exports = function () {
+    if (!alreadyExiting) {
+        alreadyExiting = true;
+        console.log('Program is exiting!');
 
-connection.connect();
+        connection.disconnect();
+
+        commands.unload();
+    }
+};

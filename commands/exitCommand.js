@@ -18,14 +18,19 @@
 
 'use strict';
 
-var connection = require('./inc/connection');
-var exitHandler = require('./inc/exitHandler');
+var connection = require('../inc/connection');
+var exitHandler = require('../inc/exitHandler');
 
-process.on('exit', exitHandler);
-process.on('SIGINT', exitHandler);
-process.on('uncaughtException', function (err) {
-    console.error(err);
+module.exports.enabled = true;
+
+module.exports.name = 'exit';
+
+module.exports.callback = function (command_name, channel, user, message, object) {
+    //if (!connection.isBroadcaster(user)) {
+    //    return console.error(new Error('The start command can only be run by the broadcaster!'));
+    //}
+
+    connection.client.sendMessageToAll('I\'m leaving now! Goodbye!');
+
     exitHandler();
-});
-
-connection.connect();
+};
