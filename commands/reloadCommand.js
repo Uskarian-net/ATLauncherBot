@@ -25,10 +25,6 @@ module.exports.enabled = true;
 module.exports.name = ['reload', 'refresh'];
 
 module.exports.callback = function (command_name, channel, user, message, object) {
-    connection.reloadListeners(function () {
-        connection.client.sendMessageToAll('Listeners reloaded!');
-    });
-
     connection.reloadCommands(function () {
         connection.client.sendMessageToAll('Commands reloaded!');
     });

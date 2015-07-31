@@ -63,13 +63,6 @@ module.exports.load = function () {
     console.log('Finished loading all the listeners!');
 };
 
-module.exports.reloadListeners = function (callback) {
-    client.removeAllListeners();
-
-    listeners.loadListeners();
-    callback();
-};
-
 module.exports.reloadCommands = function (callback) {
     commands.unload(function () {
         commands.loadCommands();
