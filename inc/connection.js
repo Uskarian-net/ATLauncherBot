@@ -85,6 +85,7 @@ module.exports.connect = function () {
     this.load();
 
     client.connect(function () {
+        console.log("Connected!");
         connected = true;
     });
 };
@@ -95,6 +96,7 @@ module.exports.disconnect = function () {
     }
 
     client.disconnect(function () {
+        console.log("Disconnected!");
         connected = false;
     });
 };
