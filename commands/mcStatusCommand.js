@@ -40,10 +40,7 @@ module.exports.callback = function (command_name, channel, user, message, object
         var whatsDown = [];
 
         _.forEach(body, function (item) {
-            console.log("a: " + item);
             for (var key in item) {
-                console.log("b: " + key);
-                console.log("c: " + item[key]);
                 if (item[key] != "green") {
                     isUp = false;
                     whatsDown.push(key);
