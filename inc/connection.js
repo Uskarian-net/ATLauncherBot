@@ -87,13 +87,15 @@ module.exports.connect = function () {
     });
 };
 
-module.exports.disconnect = function () {
+module.exports.disconnect = function (callback) {
     if (typeof client == 'undefined' || !connected) {
-        return console.error(new Error('Cannot disconnect as we\'re not connected!'));
+        console.error(new Error('Cannot disconnect as we\'re not connected!'));
+        callback();
     }
 
     client.disconnect(function () {
         console.log("Disconnected!");
         connected = false;
+        callback();
     });
 };

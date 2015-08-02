@@ -27,8 +27,10 @@ module.exports = function () {
         alreadyExiting = true;
         console.log('Program is exiting!');
 
-        connection.disconnect();
-
-        commands.unload();
+        connection.disconnect(function () {
+            commands.unload(function () {
+                process.exit(0);
+            });
+        });
     }
 };
