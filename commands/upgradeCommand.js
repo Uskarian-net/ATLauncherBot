@@ -31,8 +31,6 @@ module.exports.name = 'upgrade';
 module.exports.callback = function (command_name, channel, user, message, object) {
     functions.isOp(user, channel, function (isOp) {
         if (isOp) {
-            connection.client.sendMessageToAll('Upgrading software now!');
-
             exec('git pull', {
                 cwd: connection.config.deploy_directory
             }, function (err, stdout, stderr) {
