@@ -24,13 +24,15 @@ var connection = require('./connection');
 
 module.exports.loadListeners = function () {
     fs.readdirSync('listeners/').forEach(function (file) {
-        // Remove from the require cache so we can reload it's information
-        requireHacks.uncache('../listeners/' + file);
+        if (file.slice(-3) == '.js') {
+            // Remove from the require cache so we can reload it's information
+            requireHacks.uncache('../listeners/' + file);
 
-        var listener = require('../listeners/' + file);
+            var listener = require('../listeners/' + file);
 
-        if (listener.enabled) {
-            connection.client.addListener(listener.listening_for, listener.callback);
+            if (listener.enabled) {
+                connection.client.addListener(listener.listening_for, listener.callback);
+            }
         }
     });
 };
