@@ -26,6 +26,8 @@ module.exports.enabled = true;
 
 module.exports.name = 'mcstatus';
 
+module.exports.flood_check = 30;
+
 module.exports.callback = function (command_name, channel, user, message, object) {
     request({
         url: 'http://status.mojang.com/check',
