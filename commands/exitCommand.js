@@ -19,6 +19,7 @@
 'use strict';
 
 var connection = require('../inc/connection');
+var functions = require('../inc/functions');
 var exitHandler = require('../inc/exitHandler');
 
 module.exports.enabled = true;
@@ -26,11 +27,11 @@ module.exports.enabled = true;
 module.exports.name = 'exit';
 
 module.exports.callback = function (command_name, channel, user, message, object) {
-    //if (!connection.isBroadcaster(user)) {
-    //    return console.error(new Error('The start command can only be run by the broadcaster!'));
-    //}
+    functions.isOp(user, channel, function (isOp) {
+        if (isOp) {
+            connection.client.sendMessageToAll('I\'m leaving now! Goodbye!');
 
-    connection.client.sendMessageToAll('I\'m leaving now! Goodbye!');
-
-    exitHandler();
+            exitHandler();
+        }
+    });
 };

@@ -25,7 +25,11 @@ module.exports.enabled = true;
 module.exports.name = ['reload', 'refresh'];
 
 module.exports.callback = function (command_name, channel, user, message, object) {
-    connection.reloadCommands(function () {
-        connection.client.sendMessageToAll('Commands reloaded!');
+    functions.isOp(user, channel, function (isOp) {
+        if (isOp) {
+            connection.reloadCommands(function () {
+                connection.client.sendMessageToAll('Commands reloaded!');
+            });
+        }
     });
 };
