@@ -24,7 +24,7 @@ var exitHandler = require('../inc/exitHandler');
 
 module.exports.enabled = true;
 
-module.exports.name = 'exit';
+module.exports.name = 'test';
 
 module.exports.callback = function (command_name, channel, user, message, object) {
     connection.client.replyToMessage(user, channel, "Test");
