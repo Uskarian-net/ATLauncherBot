@@ -28,7 +28,8 @@ module.exports.startListening = function () {
         console.log('connection');
         socket.on('modUpdated', function (data) {
             console.log('modUpdated');
-            connection.client.sendMessage(connection.config.channel_for_socket_messages, '[' + data.minecraft_version + '] ' + data.mod.name + " uploaded " + data.name + ' (' + data.type + ')');
+            console.log(data);
+            connection.client.sendMessage(connection.config.channel_for_socket_messages, '[' + data.minecraft_version + '] New file for mod "' + data.mod_name + '" uploaded named "' + data.name + '" (' + data.type + ')');
         });
     });
 };
