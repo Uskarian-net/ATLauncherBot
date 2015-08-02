@@ -18,6 +18,9 @@
 
 'use strict';
 
+var connection = require('../inc/connection');
+var _ = require('lodash');
+
 module.exports.timeBetween = function (this_date, and_this_date, return_seconds) {
     if (typeof return_seconds != "boolean") {
         return_seconds = false;
@@ -119,4 +122,32 @@ module.exports.getMessageParts = function (message, limit) {
     }
 
     return matches;
+};
+
+module.exports.isOp = function (user, channel, callback) {
+    connection.client.whois(user, function (data) {
+        var isOp = false;
+
+        _.forEach(data.channels, function (item) {
+            if (item.toLowerCase().indexOf(channel.toLowerCase()) > -1 && item.substr(0, 2) == '@#') {
+                isOp = true;
+            }
+        });
+
+        callback(isOp);
+    });
+};
+
+module.exports.isVoiced = function (user, channel, callback) {
+    connection.client.whois(user, function (data) {
+        var isVoiced = false;
+
+        _.forEach(data.channels, function (item) {
+            if (item.toLowerCase().indexOf(channel.toLowerCase()) > -1 && item.substr(0, 2) == '+#') {
+                isVoiced = true;
+            }
+        });
+
+        callback(isVoiced);
+    });
 };
