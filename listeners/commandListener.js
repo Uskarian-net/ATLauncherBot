@@ -18,6 +18,8 @@
 
 'use strict';
 
+var _ = require('lodash');
+
 var commands = require('../inc/commands');
 
 module.exports.enabled = true;
@@ -34,12 +36,19 @@ module.exports.callback = function (user, channel, message, object) {
 
         name = name.substr(1);
 
-        commands.findCommand(name, function (err, res) {
+        commands.findCommand(name, function (err, command) {
             if (err) {
                 return console.error(err);
             }
 
-            res.callback(name, channel, user, message, object);
+            if (!_.isUndefined(command.flood_check) && !_.isUndefined(command.last_run)) {
+                if (command.last_run + (command.flood_check * 1000) > (new Date).getTime()) {
+                    return console.error(new Error('Cannot run command ' + name + ' as it was run too recently!'));
+                }
+            }
+
+            command.last_run = new Date().getTime();
+            command.callback(name, channel, user, message, object);
         });
     }
 };
