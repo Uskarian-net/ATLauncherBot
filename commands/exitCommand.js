@@ -29,8 +29,6 @@ module.exports.name = 'exit';
 module.exports.callback = function (command_name, channel, user, message, object) {
     functions.isOp(user, channel, function (isOp) {
         if (isOp) {
-            connection.client.sendMessageToAll('I\'m leaving now! Goodbye!');
-
             exitHandler();
         }
     });
