@@ -18,7 +18,7 @@
 
 'use strict';
 
-var exec = require('child_process').exec;
+var exec = require('sync-exec');
 
 var connection = require('../inc/connection');
 var functions = require('../inc/functions');
