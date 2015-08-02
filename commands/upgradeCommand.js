@@ -33,12 +33,16 @@ module.exports.callback = function (command_name, channel, user, message, object
         if (isOp) {
             connection.client.sendMessageToAll('Upgrading software now!');
 
-            exec('git pull', function (err, stdout, stderr) {
+            exec('git pull', {
+                cwd: connection.config.deploy_directory
+            }, function (err, stdout, stderr) {
                 if (err) {
                     return exitHandler();
                 }
 
-                exec('npm install', function (err, stdout, stderr) {
+                exec('npm install', {
+                    cwd: connection.config.deploy_directory
+                }, function (err, stdout, stderr) {
                     exitHandler();
                 });
             });

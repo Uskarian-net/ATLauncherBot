@@ -3,6 +3,7 @@
     "username": "Username",
     "nickserv_password": "password",
     "socketio_port": 8080,
+    "deploy_directory": "/home/user/path/to/folder",
     "channels_to_join": [
         "#Some-Channel"
     ]
