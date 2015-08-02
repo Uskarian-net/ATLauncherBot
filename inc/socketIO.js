@@ -25,10 +25,7 @@ module.exports.startListening = function () {
     io.listen(connection.config.socketio_port);
 
     io.on('connection', function (socket) {
-        console.log('connection');
         socket.on('modUpdated', function (data) {
-            console.log('modUpdated');
-            console.log(data);
             connection.client.sendMessage(connection.config.channel_for_socket_messages, '[' + data.minecraft_version + '] New file for mod "' + data.mod_name + '" uploaded named "' + data.name + '" (' + data.type + ')');
         });
     });
