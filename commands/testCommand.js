@@ -19,6 +19,7 @@
 'use strict';
 
 var connection = require('../inc/connection');
+var irc = require('irc');
 
 module.exports.enabled = true;
 
@@ -27,5 +28,5 @@ module.exports.name = 'test';
 module.exports.flood_check = 5;
 
 module.exports.callback = function (command_name, channel, user, message, object) {
-    connection.client.replyToMessage(user, channel, 'Testing Flood Control! ' + (new Date).getTime());
+    connection.client.replyToMessage(user, channel, irc.colors.wrap('light_red', 'Testing!'));
 };

@@ -19,6 +19,7 @@
 'use strict';
 
 var connection = require('../inc/connection');
+var functions = require('../inc/functions');
 
 module.exports.enabled = true;
 
