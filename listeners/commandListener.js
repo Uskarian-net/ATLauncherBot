@@ -25,10 +25,6 @@ module.exports.enabled = true;
 module.exports.listening_for = 'message#';
 
 module.exports.callback = function (user, channel, message, object) {
-    console.log(object);
-    console.log(connection.client.whois(user, function(a) {
-        console.log(a);
-    }));
     if (message[0] == '!') {
         var name = message;
 
