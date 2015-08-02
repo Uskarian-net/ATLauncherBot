@@ -26,6 +26,7 @@ var _ = require('lodash');
 
 var commands = require('./commands');
 var listeners = require('./listeners');
+var socketIO = require('./socketIO');
 
 var connected = false;
 
@@ -41,6 +42,7 @@ var client = new irc.Client(config.server, config.username, {
     autoConnect: false
 });
 
+module.exports.config = config;
 module.exports.client = client;
 
 module.exports.client.replyToMessage = function (user, channel, message) {
@@ -81,6 +83,8 @@ module.exports.connect = function () {
 
     this.load();
 
+    socketIO.startListening();
+
     client.connect(function () {
         console.log("Connected!");
         connected = true;
@@ -92,6 +96,8 @@ module.exports.disconnect = function (callback) {
         console.error(new Error('Cannot disconnect as we\'re not connected!'));
         callback();
     }
+
+    socketIO.stopListening();
 
     client.disconnect(function () {
         console.log("Disconnected!");

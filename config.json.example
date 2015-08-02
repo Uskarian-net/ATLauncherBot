@@ -2,6 +2,8 @@
     "server": "some.irc.com",
     "username": "Username",
     "nickserv_password": "password",
+    "socketio_port": 8080,
+    "channel_for_socket_messages": "#Some-Channel",
     "channels_to_join": [
         "#Some-Channel"
     ]
