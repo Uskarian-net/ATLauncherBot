@@ -26,6 +26,8 @@ module.exports.enabled = true;
 
 module.exports.name = 'pack';
 
+module.exports.flood_check = 30;
+
 module.exports.callback = function (command_name, channel, user, message, object) {
     var parts = functions.getMessageParts(message, 2);
 
